@@ -1,12 +1,9 @@
+import sys
 from typing import List
 
 
 WORDS_SOURCE = "/usr/share/dict/words"
 MIN_WORD_LEN = 4
-
-
-def get_input() -> str:
-    return input("Enter the puzzle letters, with the central one first:")
 
 
 def read_words() -> List[str]:
@@ -33,9 +30,15 @@ def consider_word(word: str , inp: str) -> None:
 
 
 def helper():
-    inp = ""
-    while len(inp) != 7:
-        inp = get_input().upper()
+    if len(sys.argv) != 2:
+        print("Usage: python main.py <puzzle_letters>")
+        print("Example: python main.py ABCDEFG")
+        sys.exit(1)
+    
+    inp = sys.argv[1].upper()
+    if len(inp) != 7:
+        print("Error: Puzzle letters must be exactly 7 characters long")
+        sys.exit(1)
 
     words = sorted(read_words())
     for word in words:
