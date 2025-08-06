@@ -7,16 +7,17 @@ MIN_WORD_LEN = 4
 
 
 def read_words() -> List[str]:
-    words: List[str] = []
+    words: Set[str] = set()
     with open(WORDS_SOURCE) as f:
         lines = f.readlines()
 
     for word in lines:
         stripped_word = word.strip()
         if len(stripped_word) >= MIN_WORD_LEN:
-            words.append(stripped_word.upper())
+            w = stripped_word.upper()
+            words.add(w)
 
-    return words
+    return list(words)
 
 
 def consider_word(word: str , inp: str) -> None:
